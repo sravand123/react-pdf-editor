@@ -1,10 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
 import { Rnd } from "react-rnd";
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Typography from '@material-ui/core/Typography';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { Input } from '@material-ui/core';
 import FormatBoldOutlinedIcon from '@material-ui/icons/FormatBoldOutlined';

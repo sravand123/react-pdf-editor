@@ -5,7 +5,6 @@ import { Button, ButtonGroup, Input, MenuItem, Select } from '@material-ui/core'
 import { grey } from '@material-ui/core/colors';
 import * as  fileDownload from 'js-file-download';
 import { PDFDocument, StandardFonts, rgb, scale } from 'pdf-lib'
-import Signature from './blueSig.png';
 import ImageDialog from './ImageDialog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons'

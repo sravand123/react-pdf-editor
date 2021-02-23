@@ -1,22 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react'
-import * as pdfjsLib from "pdfjs-dist/build/pdf";
-import { Rnd } from "react-rnd";
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
 import DraggableInput from './DraggableInput';
 import DraggableImage from './DraggableImage';
-import { scale } from 'pdf-lib';
-import ImageDialog from './ImageDialog';
 
 
 export default function Page(props) {
 
     const divRef = useRef(null);
     const canvasRef = useRef(null);
-    const refsArray = useRef([]);
     const [id, setId] = useState(0);
     const [scale, setScale] = useState(props.scale);
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
     const [inputList, setInputList] = useState([]);
     const [imageList, setImageList] = useState([]);
     const [imageId, setImageId] = useState(0);

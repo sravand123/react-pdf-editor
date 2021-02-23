@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Rnd } from "react-rnd";
-import sign from './blueSig.png';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
