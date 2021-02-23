@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import Canvas from './Canvas'
+import Test from './Test'
+import samplePDF from './sravan_cv.pdf'
+import Pdf from './Pdf'
+import ImageDialog from './ImageDialog';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  
+  const [pdf,setPdf]= useState(samplePDF);
+  const handleFileChange =(pdf)=>{
+    setPdf(pdf);
+  }
+  return <Pdf pdf = {pdf} handleFileChange = {handleFileChange} ></Pdf>
+ //return <ImageDialog></ImageDialog>
 }
 
-export default App;
+export default App
