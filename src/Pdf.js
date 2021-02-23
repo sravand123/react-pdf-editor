@@ -23,7 +23,7 @@ export default function Pdf(props) {
     const [imageList, setImageList] = useState([]);
     const [selectedImage,setSelectedImage] = useState(null);
     const [dialogMode,setDialogMode  ] = useState(false);
-
+    const [modified,setModifed] = useState(false);
 
     useEffect(() => {
             setPages([]);
@@ -144,7 +144,10 @@ export default function Pdf(props) {
             const pdfBytes = await pdfDoc.save();
             let file = new File([pdfBytes],'modify.pdf')
             props.handleFileChange(URL.createObjectURL(file));
-            setName("modified_"+name);
+            if(!modified){
+                setName("modified_"+name);
+                setModifed(true);
+            }
             
         }
         modifyPdf();

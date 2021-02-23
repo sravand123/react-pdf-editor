@@ -101,9 +101,9 @@ export default function DraggableInput(props) {
                 bounds={".page__" + props.pageNum}
                 enableResizing="disable"
             >
-                <input id="imp" onKeyDown={handleKeyDown} onContextMenu={handleClick} onChange={handleChange} value={text} onFocus={focus} type="text" ref={RndRef} style={{
-                    backgroundColor: 'transparent', border: '3px  solid skyblue', borderRadius: '5px',
-                    outline: 'none', autocomplete: 'off', width: '200px', height: 'auto', fontSize: fontSize + 'px', fontFamily: 'Helvetica, sans-serif', fontStyle: italic, fontWeight: bold
+                <input id="imp" autoComplete="off" onKeyDown={handleKeyDown} onContextMenu={handleClick} onChange={handleChange} value={text} onFocus={focus} type="text" ref={RndRef} style={{
+                    backgroundColor: 'transparent', border: '3px  solid skyblue', borderRadius: '5px' ,
+                    outline: 'none', width: '200px', height: 'auto', fontSize: fontSize + 'px', fontFamily: 'Helvetica, sans-serif', fontStyle: italic, fontWeight: bold
                 }}
                     onKeyPress={setWidth}  >
 
