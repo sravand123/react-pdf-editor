@@ -164,7 +164,7 @@ export default function Page(props) {
     }
     return (
         <React.Fragment>
-            <div ref={divRef} id="imp" style={{ position: 'relative', marginLeft: 'auto', marginRight: 'auto' }}>
+            <div ref={divRef} id="imp" style={{ position: 'relative', marginLeft: 'auto', marginRight: 'auto' ,boxShadow:'0 6px 6px rgba(0,0,0,0.2)', paddingBottom:'5px' }}>
                 <canvas id="imp" onClick={handleClick} className={"page__" + props.pageNum} ref={canvasRef} />
                 {
                     Array.from(

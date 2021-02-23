@@ -48,6 +48,8 @@ export default function DraggableInput(props) {
         setWidth();
 
     }, [props]);
+
+
     const handleClick = (event) => {
 
         event.preventDefault();
@@ -101,9 +103,9 @@ export default function DraggableInput(props) {
                 bounds={".page__" + props.pageNum}
                 enableResizing="disable"
             >
-                <input id="imp" autoComplete="off" onKeyDown={handleKeyDown} onContextMenu={handleClick} onChange={handleChange} value={text} onFocus={focus} type="text" ref={RndRef} style={{
+                <input id="imp" spellCheck="false" autoComplete="off" onKeyDown={handleKeyDown} onContextMenu={handleClick} onChange={handleChange} value={text} onFocus={focus} type="text" ref={RndRef} style={{
                     backgroundColor: 'transparent', border: '3px  solid skyblue', borderRadius: '5px' ,
-                    outline: 'none', width: '200px', height: 'auto', fontSize: fontSize + 'px', fontFamily: 'Helvetica, sans-serif', fontStyle: italic, fontWeight: bold
+                    outline: 'none', width: '200px', height: 'auto', fontSize: fontSize + 'px', fontFamily: 'Helvetica, sans-serif', fontStyle: italic, fontWeight: bold, padding:'0px 0px 0px 0px'
                 }}
                     onKeyPress={setWidth}  >
 
@@ -143,13 +145,14 @@ export default function DraggableInput(props) {
                         else {
                             setItalic('unset');
                             props.handleFontChange(props.id, fontSize, bold, 'unset');
+                            setWidth();
+
                         }
-                        setWidth();
 
                     }} ><FormatItalicIcon color={italic == 'italic' ? ('action') : ('disabled')}></FormatItalicIcon></MenuItem>
                     <MenuItem    >
                         <Input value={fontSize} onChange={(e) => {
-                            setFontSize(e.target.value); props.handleFontChange(props.id, fontSize, bold, italic);
+                            setFontSize(e.target.value); props.handleFontChange(props.id, e.target.value, bold, italic);setWidth();
                         }} style={{ width: '50px' }} type='number'></Input></MenuItem>
 
                 </Menu>

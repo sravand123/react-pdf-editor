@@ -8,7 +8,7 @@ import { PDFDocument, StandardFonts, rgb, scale } from 'pdf-lib'
 import ImageDialog from './ImageDialog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
-import {GetApp,ZoomIn,ZoomOut,TextFields,InsertPhoto, Backup} from '@material-ui/icons';
+import { GetApp, ZoomIn, ZoomOut, TextFields, InsertPhoto, Backup } from '@material-ui/icons';
 
 
 export default function Pdf(props) {
@@ -16,42 +16,43 @@ export default function Pdf(props) {
     const [scale, setScale] = useState(1);
     const [pages, setPages] = useState([]);
     const [mode, setMode] = useState('none');
-    const [name,setName] = useState('sample.pdf')
-   
+    const [name, setName] = useState('sample.pdf')
+
     const [pdf, setPdf] = useState(null);
     const [inputList, setInputList] = useState([]);
     const [imageList, setImageList] = useState([]);
-    const [selectedImage,setSelectedImage] = useState(null);
-    const [dialogMode,setDialogMode  ] = useState(false);
-    const [modified,setModifed] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [dialogMode, setDialogMode] = useState(false);
+    const [modified, setModifed] = useState(false);
 
     useEffect(() => {
-            setPages([]);
-            let pdfPages = [];
-            const loadingTask = pdfjsLib.getDocument(props.pdf);
-            loadingTask.promise.then(function (pdf) {
-                for (let i = 0; i < pdf.numPages; i++) {
-                    pdf.getPage(i + 1).then(page => {
-                        pdfPages = [...pdfPages, page]
-                        if (pdfPages.length == pdf.numPages) {
-                            setPages(pdfPages);
-                        }
-                    })
-                }
-            });
-        
+        setPages([]);
+        let pdfPages = [];
+        const loadingTask = pdfjsLib.getDocument(props.pdf);
+        loadingTask.promise.then(function (pdf) {
+            for (let i = 0; i < pdf.numPages; i++) {
+                pdf.getPage(i + 1).then(page => {
+                    pdfPages = [...pdfPages, page]
+                    if (pdfPages.length == pdf.numPages) {
+                        setPages(pdfPages);
+                    }
+                })
+            }
+        });
+
         setPdf(props.pdf);
 
 
     }, [props]);
-   
-    const onImageSelect=(image)=>{
+
+    const onImageSelect = (image) => {
         setDialogMode(false);
-        if(image==null){setMode('none');
-        setSelectedImage(image);
+        if (image == null) {
+            setMode('none');
+            setSelectedImage(image);
+        }
     }
-    }
-    const openImageDialog = ()=>{
+    const openImageDialog = () => {
         setDialogMode(true);
     }
 
@@ -86,7 +87,7 @@ export default function Pdf(props) {
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i];
                 let { width, height } = page.getSize();
-                if (i<inputList.length) {
+                if (i < inputList.length) {
                     for (let j = 0; j < inputList[i].length; j++) {
                         let x = inputList[i][j].x;
                         let y = inputList[i][j].y;
@@ -95,7 +96,7 @@ export default function Pdf(props) {
                         let text = inputList[i][j].text;
                         let fontStyle = inputList[i][j].fontStyle;
                         let fontWeight = inputList[i][j].fontWeight;
-                     
+
                         let font = Helvetica;
                         if (fontWeight == 'bold' && fontStyle == 'italic') {
                             font = HelveticaBoldOblique;
@@ -105,50 +106,50 @@ export default function Pdf(props) {
                         else if (fontWeight == "bold") font = HelveticaBold;
 
                         x = x / (scale) + 3;
-                        y = height - y / (scale) - fontSize / (scale) + 3;
+                        y = height - y / (scale) - parseInt(fontSize) / (scale) - 3;
 
                         page.drawText(text, {
                             x: x,
                             y: y,
-                            size: parseInt(fontSize),
+                            size: parseInt(fontSize)/(scale),
                             font: font
                         })
 
                     }
                 }
-                if(selectedImage!=null){
+                if (selectedImage != null) {
 
                     const pngImageBytes = await fetch(selectedImage).then(res => {
-                    
+
                         return res.arrayBuffer();
                     });
                     const pngImage = await pdfDoc.embedPng(pngImageBytes);
-                    if(i<imageList.length){
-                        for (let j = 0 ; j < imageList[i].length; j++) {
+                    if (i < imageList.length) {
+                        for (let j = 0; j < imageList[i].length; j++) {
                             let image = imageList[i][j];
                             page.drawImage(pngImage, {
-                                x: image.x/(image.scale),
-                                y: height - ((image.y+image.height) / (image.scale)),
-                                width: (image.width/image.scale),
-                                height: (image.height/image.scale)
+                                x: image.x / (image.scale),
+                                y: height - ((image.y + image.height) / (image.scale)),
+                                width: (image.width / image.scale),
+                                height: (image.height / image.scale)
                             })
                         }
                     }
                 }
-               
+
 
 
             }
 
 
             const pdfBytes = await pdfDoc.save();
-            let file = new File([pdfBytes],'modify.pdf')
+            let file = new File([pdfBytes], 'modify.pdf')
             props.handleFileChange(URL.createObjectURL(file));
-            if(!modified){
-                setName("modified_"+name);
+            if (!modified) {
+                setName("modified_" + name);
                 setModifed(true);
             }
-            
+
         }
         modifyPdf();
     }
@@ -159,43 +160,43 @@ export default function Pdf(props) {
         }
         modifyPdf();
     }
-    const handleFileChange = (e)=>{
-        if(e.target.files.length>0)
-           { props.handleFileChange(URL.createObjectURL(e.target.files[0]));
+    const handleFileChange = (e) => {
+        if (e.target.files.length > 0) {
+            props.handleFileChange(URL.createObjectURL(e.target.files[0]));
             setName(e.target.files[0].name);
-           }
+        }
     }
     return (
 
         <React.Fragment  >
-    
+
             <div style={{ width: '100%', textAlign: 'center' }}>
-            <ImageDialog  setSelectedImage={setSelectedImage} setDialogMode={setDialogMode} onImageSelect= {onImageSelect} dialogMode={dialogMode}></ImageDialog>
+                <ImageDialog setSelectedImage={setSelectedImage} setDialogMode={setDialogMode} onImageSelect={onImageSelect} dialogMode={dialogMode}></ImageDialog>
 
                 <div style={{ height: '10vh', display: 'flex', flexDirection: 'row', backgroundColor: grey[100] }}>
-                    <div style={{ fontFamily: 'cursive', margin: '20px', alignSelf: 'flex-start' }}>{name}
-                    <input onChange={handleFileChange} accept="pdf" style={{ display: 'none' }} id="file-upload" type="file" />
+                    <div style={{ fontFamily: 'sans-serif', margin: '10px', alignSelf: 'flex-start' }}>{name}
+                        <input onChange={handleFileChange} accept="pdf" style={{ display: 'none' }} id="file-upload" type="file" />
                         <label htmlFor="file-upload">
-                           <Button  color="primary" variant="contained" style={{marginBottom:'10px',marginLeft:'10px'}} component="span"><Backup></Backup></Button>
+                            <Button color="primary" variant="contained" style={{ marginLeft: '10px' }} component="span"><Backup></Backup></Button>
                         </label>
-                        </div>
+                    </div>
                     <div style={{ marginLeft: 'auto', marginTop: '8px' }}>
-                        
+
                         <ButtonGroup color="primary" variant="contained" aria-label="outlined secondary button group" >
-                        
+
                             <Button onClick={sign}><FontAwesomeIcon icon={faFileSignature} /></Button>
                             <Button onClick={Download}><GetApp></GetApp></Button>
 
                             <Button onClick={() => { setScale(scale + 0.1) }}><ZoomIn></ZoomIn></Button>
                             <Button onClick={() => { setScale(scale - 0.1) }}><ZoomOut></ZoomOut></Button>
                             <Button onClick={() => { setMode("text") }}><TextFields></TextFields></Button>
-                            <Button onClick={() => { setMode("sign");openImageDialog() }}><InsertPhoto></InsertPhoto></Button>
+                            <Button onClick={() => { setMode("sign"); openImageDialog() }}><InsertPhoto></InsertPhoto></Button>
 
                         </ButtonGroup>
                     </div>
 
                 </div>
-                <div style={{ height: '90vh', maxHeight: '90vh', overflow: 'scroll', backgroundColor: 'gray' }}>
+                <div style={{ height: '90vh', maxHeight: '90vh', overflow: 'scroll', backgroundColor: grey[100] }}>
 
 
 
@@ -215,7 +216,7 @@ export default function Pdf(props) {
                                         changeMode={changeMode}
                                         inputListChange={inputListChange}
                                         imageListChange={imageListChange}
-                                        selectedImage = {selectedImage}
+                                        selectedImage={selectedImage}
                                     />
                                 ),
                             )
