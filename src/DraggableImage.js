@@ -25,7 +25,6 @@ const DraggableImage = props => {
     setx(props.imageData.x);
     sety(props.imageData.y);
     setSelectedImage(props.selectedImage);
-    console.log(props);
 
   },[props])
   const handleClick = (event) => {

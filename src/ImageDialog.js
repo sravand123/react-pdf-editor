@@ -129,7 +129,6 @@ export default function ImageDialog(props) {
         }
     }
     const onSelect = () => {
-        console.log(preview);
         props.onImageSelect(preview);
         props.setSelectedImage(preview);
         setOpen(false);

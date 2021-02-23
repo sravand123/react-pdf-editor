@@ -34,7 +34,6 @@ export default function Pdf(props) {
                     pdf.getPage(i + 1).then(page => {
                         pdfPages = [...pdfPages, page]
                         if (pdfPages.length == pdf.numPages) {
-                            console.log(pdfPages.length);
                             setPages(pdfPages);
                         }
                     })
@@ -88,7 +87,6 @@ export default function Pdf(props) {
                 const page = pages[i];
                 let { width, height } = page.getSize();
                 if (i<inputList.length) {
-                    console.log(inputList[i]);
                     for (let j = 0; j < inputList[i].length; j++) {
                         let x = inputList[i][j].x;
                         let y = inputList[i][j].y;
@@ -97,8 +95,7 @@ export default function Pdf(props) {
                         let text = inputList[i][j].text;
                         let fontStyle = inputList[i][j].fontStyle;
                         let fontWeight = inputList[i][j].fontWeight;
-                        console.log(fontStyle);
-                        console.log(fontWeight);
+                     
                         let font = Helvetica;
                         if (fontWeight == 'bold' && fontStyle == 'italic') {
                             font = HelveticaBoldOblique;
@@ -129,7 +126,6 @@ export default function Pdf(props) {
                     if(i<imageList.length){
                         for (let j = 0 ; j < imageList[i].length; j++) {
                             let image = imageList[i][j];
-                            console.log(image.x , image.y , image.width,image.scale,height - (image.y ) / (image.scale))
                             page.drawImage(pngImage, {
                                 x: image.x/(image.scale),
                                 y: height - ((image.y+image.height) / (image.scale)),
@@ -161,7 +157,6 @@ export default function Pdf(props) {
         modifyPdf();
     }
     const handleFileChange = (e)=>{
-        console.log(e.target.files[0]);
         if(e.target.files.length>0)
            { props.handleFileChange(URL.createObjectURL(e.target.files[0]));
             setName(e.target.files[0].name);

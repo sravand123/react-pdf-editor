@@ -98,7 +98,6 @@ export default function Page(props) {
                 inpList[ind].x = d.x;
                 inpList[ind].y = d.y;
                 inpList[ind].scale = props.scale;
-                console.log(props.scale, inpList[ind]);
 
 
             }

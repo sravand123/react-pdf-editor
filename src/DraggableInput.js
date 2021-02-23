@@ -73,7 +73,6 @@ export default function DraggableInput(props) {
         props.inputChange(props.id, e.target.value)
     }
     const handleClickAway = (e) => {
-        // console.log(e.target)
         if (e.target.id == "imp") {
             var inp = RndRef.current;
             inp.style.border = "none";
