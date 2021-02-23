@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import samplePDF from './sravan_cv.pdf'
+import samplePDF from './sample.pdf'
 import Pdf from './Pdf'
 
 function App() {
