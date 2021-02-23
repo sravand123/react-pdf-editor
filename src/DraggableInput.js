@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { Rnd } from "react-rnd";
 import MenuItem from '@material-ui/core/MenuItem';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import { Input } from '@material-ui/core';
+import { Input,Menu } from '@material-ui/core';
 import FormatBoldOutlinedIcon from '@material-ui/icons/FormatBoldOutlined';
 import FormatItalicIcon from '@material-ui/icons/FormatItalic';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';

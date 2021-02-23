@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { Grid, makeStyles, Switch } from '@material-ui/core';
+import {  makeStyles, Switch } from '@material-ui/core';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import img1 from './blueSig.png'
-import img2 from './mySig.jpeg'
-import img3 from './signature.png'
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
+
 import * as  Jimp from 'jimp/browser/lib/jimp';
 
 const useStyles = makeStyles((theme) => ({
