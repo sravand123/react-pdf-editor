@@ -8,12 +8,12 @@ import { PDFDocument, StandardFonts, rgb, scale } from 'pdf-lib'
 import ImageDialog from './ImageDialog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileSignature } from '@fortawesome/free-solid-svg-icons'
-import { GetApp, ZoomIn, ZoomOut, TextFields, InsertPhoto, Backup } from '@material-ui/icons';
+import { GetApp, ZoomIn, ZoomOut, TextFields, InsertPhoto, Backup, TramRounded } from '@material-ui/icons';
 
 
 export default function Pdf(props) {
     pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
-    const [scale, setScale] = useState(1);
+    const [scale, setScale] = useState(1.5);
     const [pages, setPages] = useState([]);
     const [mode, setMode] = useState('none');
     const [name, setName] = useState('sample.pdf')
@@ -75,7 +75,7 @@ export default function Pdf(props) {
             if (props.pdf == pdf)
                 existingPdfBytes = await fetch(pdf).then(res => res.arrayBuffer())
             else existingPdfBytes = pdf;
-            const pdfDoc = await PDFDocument.load(existingPdfBytes)
+            const pdfDoc = await PDFDocument.load(existingPdfBytes,{ignoreEncryption:true})
 
             const Helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica)
             const HelveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold)
@@ -106,7 +106,7 @@ export default function Pdf(props) {
                         else if (fontWeight == "bold") font = HelveticaBold;
 
                         x = x / (scale) + 3;
-                        y = height - y / (scale) - parseInt(fontSize) / (scale) - 3;
+                        y = height - y / (scale) - parseInt(fontSize) / (scale) - 3 +scale;
 
                         page.drawText(text, {
                             x: x,
