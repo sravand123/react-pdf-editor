@@ -125,7 +125,7 @@ export default function Page(props) {
         if (props.mode == "text")
             addInput(e);
         else if (props.mode == "sign") {
-            if(selectedImage!=null){
+            if(selectedImage!==null){
                 addImage(e);
                 props.changeMode("none");
             }
