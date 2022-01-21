@@ -47,7 +47,7 @@ export default function Pdf(props) {
 
     const onImageSelect = (image) => {
         setDialogMode(false);
-        if (image == null) {
+        if (image === null) {
             setMode('none');
             setSelectedImage(image);
         }
@@ -117,7 +117,7 @@ export default function Pdf(props) {
 
                     }
                 }
-                if (selectedImage != null) {
+                if (selectedImage !== null) {
 
                     const pngImageBytes = await fetch(selectedImage).then(res => {
 
