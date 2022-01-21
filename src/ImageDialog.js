@@ -73,7 +73,7 @@ export default function ImageDialog(props) {
         }
     }
     const handleTransparentChange = () => {
-        if (image != null)
+        if (image !== null)
            { setTransparent(!transparent);
             setPreview(files[image].normal);
             setColor(null);
@@ -137,7 +137,7 @@ export default function ImageDialog(props) {
     const handleColorChange = (e) => {
         let alpha = 255;
         if (transparent == true) alpha = 0;
-        if (image != null) {
+        if (image !== null) {
             setColor(e.target.id);
 
             if (e.target.id == "black")
@@ -177,7 +177,7 @@ export default function ImageDialog(props) {
 
                         </GridList>
                     </div>
-                    {(files.length!=0 && preview!=null) ?(
+                    {(files.length!=0 && preview!==null) ?(
                     <div>
 
                         <div>
@@ -202,7 +202,7 @@ export default function ImageDialog(props) {
                         <div id="green" onClick={handleColorChange} style={{ display: 'inline-block', margin: '10px', backgroundColor: '#00C851', width: '30px', height: '30px', borderRadius: '30px', border: '5px solid ' + ((color == 'green') ? ('#33b5e5') : ('white')) }}>
     
                         </div>
-                        {preview == null ? (<div></div>) : (<img src={preview} width={200} height={100}></img>)}
+                        {preview === null ? (<div></div>) : (<img src={preview} width={200} height={100}></img>)}
                     </div>):( <div></div> )}
 
                 </DialogContent>
@@ -213,7 +213,7 @@ export default function ImageDialog(props) {
                     <label htmlFor="icon-button-file">
                         <Button color="primary" variant="contained" component="span">Upload</Button>
                     </label>
-                   {(files.length==0 || preview==null)?(<div></div>):(<Button color="primary" variant="contained" onClick={onSelect}>Select</Button>
+                   {(files.length==0 || preview===null)?(<div></div>):(<Button color="primary" variant="contained" onClick={onSelect}>Select</Button>
 )}
 
                 </DialogActions>
